@@ -3,7 +3,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { createContext, useState } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -30,29 +30,29 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const loginUser = async ({ email, password }) => {
-    try {
-      let request = await axios.post(`${process.env.APP_API_BASE_URL}/login`, {
-          email,
-          password,
-        }
-      );
+  // const loginUser = async ({ email, password }) => {
+  //   try {
+  //     let request = await axios.post(`${process.env.APP_API_BASE_URL}/login`, {
+  //         email,
+  //         password,
+  //       }
+  //     );
 
-      if (request.data.success && request.data.message === "logged in successfully") {
+  //     if (request.data.success && request.data.message === "logged in successfully") {
         
-        // this.axios.defaults.headers.common[
-        //   "Authorization"
-        // ] = `Bearer ${request.data.token}`;
-        console.log(request.data.token);
+  //       // this.axios.defaults.headers.common[
+  //       //   "Authorization"
+  //       // ] = `Bearer ${request.data.token}`;
+  //       console.log(request.data.token);
 
-        toast.success("User logged in successfully")
-        router.push("/");
-      }
-    } catch (error) {
-      setError(error?.response?.data?.message);
-      toast.error("Unexpected error occurred, please try again later");
-    }
-  };
+  //       toast.success("User logged in successfully")
+  //       router.push("/");
+  //     }
+  //   } catch (error) {
+  //     setError(error?.response?.data?.message);
+  //     toast.error("Unexpected error occurred, please try again later");
+  //   }
+  // };
 
   const clearErrors = () => {
     setError(null);
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
         error,
         setUser,
         registerUser,
-        loginUser,
+        // loginUser,
         clearErrors,
       }}
     >

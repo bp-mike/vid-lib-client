@@ -1,31 +1,42 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useContext, useEffect } from "react";
+import { useState } from "react";
+import { signIn } from "next-auth/react"
 import { toast } from "react-toastify";
-import AuthContext from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
-  const { error, loginUser, clearErrors } = useContext(AuthContext);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      clearErrors();
-    }
-  }, [error]);
+  const router = useRouter();
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      loginUser({ email, password});
+      submitHandler();
     }
   };
 
-  const submitHandler = () => {
-    loginUser({ email, password});
+  const submitHandler = async () => {
+    try {
+      const data = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      })
+  
+      if(data?.error){
+        toast.error(data?.error)
+      }
+  
+      if(data?.ok){
+        router.push('/')
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
