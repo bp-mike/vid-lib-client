@@ -1,0 +1,4 @@
+APP_API_BASE_URL=http://localhost:3000
+
+APP_DEVELOPMENT_EMAIL=admin@mail.com
+APP_DEVELOPMENT_PASSWORD=Admin@123
