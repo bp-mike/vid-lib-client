@@ -14,9 +14,11 @@ const Header = () => {
   const { cart } = useContext(CartContext);
   const cartItems = cart?.cartItems;
 
+  console.log(data);
+
   useEffect(() => {
     if(data){
-      setUser(data.user)
+      setUser(data.user.user)
     }
   }, [data])
 

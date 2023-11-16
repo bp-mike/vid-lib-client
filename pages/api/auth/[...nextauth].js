@@ -28,8 +28,14 @@ export default NextAuth({
               id: request.data.user.id,
               name: request.data.user.userName,
               email: request.data.user.email,
+              avatar: request.data.user.avatar,
+              role: request.data.user.role,
+              createdAt: request.data.user.createdAt,
             };
-            return user;
+
+            const jwt = request.data.token;
+
+            return { user, jwt};;
           } else {
             // If the login fails, throw an error
             throw new Error(request.data.message);
@@ -43,6 +49,21 @@ export default NextAuth({
   ],
   pages: {
     signIn: "/login",
+  },
+  callbacks: {
+    jwt: async ({ token, user}) => {
+      if(user) {
+        token.user = user;
+      }
+      return token
+    },
+    session: async ({ session, token }) => {
+      session.user = token.user;
+      session.jwt = token.jwt;
+      // delete password from session
+      // delete session?.user?.password
+      return session;
+    }
   },
   secret: process.env.NEXTAUTH_SECRET,
 });

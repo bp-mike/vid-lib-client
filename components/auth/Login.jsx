@@ -4,13 +4,16 @@ import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react"
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { parseCallbackUrl } from "@/helpers/helpers";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const router = useRouter();
+  const params = useSearchParams();
+  const callBackUrl = params.get("callbackUrl");
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -23,7 +26,8 @@ const Login = () => {
       const data = await signIn('credentials', {
         email,
         password,
-        redirect: false,
+        // redirect: false,
+        callbackUrl: callBackUrl ? parseCallbackUrl(callBackUrl) : "/",
       })
   
       if(data?.error){
