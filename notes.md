@@ -9,6 +9,8 @@ import ListMovies from "@/components/movies/ListMovies";
 import queryString from "query-string";
 import { useSession } from "next-auth/react";
 
+<!-- TODO explore using authContext -->
+
 const getMovies = async (searchParams, token) => {
   const urlParams = {
     titleSearch: searchParams.titleSearch,
@@ -85,3 +87,14 @@ stored session data
     },
     "expires": "2023-12-16T06:22:21.666Z"
 }
+
+##======================================
+set up cloudinary work environment
+
+npm i @cloudinary/url-gen @cloudinary/react
+
+import {Cloudinary} from "@cloudinary/url-gen";
+
+const App = () => {
+  const cld = new Cloudinary({cloud: {cloudName: 'dbsnwtry7'}});
+};

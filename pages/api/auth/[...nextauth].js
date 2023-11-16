@@ -55,6 +55,35 @@ export default NextAuth({
       if(user) {
         token.user = user;
       }
+      
+      if (token?.profileUpdated) {
+        // hit the db and return the updated user
+        try {
+          const request = await axios.get(`${process.env.APP_API_BASE_URL}/users/${token.user.user.id}`);
+          if (
+            request.data.success &&
+            request.data.message === "User Data Fetched Successfully"
+          ) {
+            // If the login is successful, directly return the user object
+            const updatedUser = {
+              id: request.data.user.id,
+              name: request.data.user.userName,
+              email: request.data.user.email,
+              avatar: request.data.user.avatar,
+              role: request.data.user.role,
+              createdAt: request.data.user.createdAt,
+            };
+
+            token.user = updatedUser;
+          } else {
+            // If the login fails, throw an error
+            throw new Error(request.data.message);
+          }
+        } catch (error) {
+          // Handle any unexpected errors
+          throw new Error("Authentication failed");
+        }
+      }
       return token
     },
     session: async ({ session, token }) => {

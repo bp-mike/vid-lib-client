@@ -14,8 +14,6 @@ const Header = () => {
   const { cart } = useContext(CartContext);
   const cartItems = cart?.cartItems;
 
-  console.log(data);
-
   useEffect(() => {
     if(data){
       setUser(data.user.user)
@@ -63,7 +61,7 @@ const Header = () => {
                   <img
                     className="w-10 h-10 rounded-full"
                     src={
-                      user?.avatar ? user?.avatar?.url : "/images/default.png"
+                      user?.avatar ? user?.avatar : "/images/default.png"
                     }
                   />
                   <div className="space-y-1 font-medium">
