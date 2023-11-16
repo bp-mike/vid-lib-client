@@ -87,6 +87,15 @@ stored session data
     },
     "expires": "2023-12-16T06:22:21.666Z"
 }
+##======================================
+updated user obj formdata 
+{
+    "formData": {
+        "userName": "RobertJohnson",
+        "email": "robert.johnson@example.com",
+        "avatar": {}
+    }
+}
 
 ##======================================
 set up cloudinary work environment

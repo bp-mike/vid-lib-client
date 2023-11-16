@@ -59,7 +59,7 @@ const UpdateProfile = () => {
       avatar: avatarUrl !== "" ? avatarUrl : avatar, // Assuming avatar is a base64-encoded string
     };
     setAvatar(avatarUrl);
-    console.log(formData);
+    console.log(avatar);
     updateProfile(formData);
   };
 

@@ -54,13 +54,7 @@ export const AuthProvider = ({ children }) => {
 
       const request = await axios.patch(
         `${process.env.APP_API_BASE_URL}/users/${user.id}`,
-        formData,
-        // {
-        //   headers: {
-        //     "Content-Type": "multipart/form-data",
-        //   },
-        // }
-      );
+        formData);
 
       if (request?.data?.success && request.data.message === "User Update Successfully") {
         // loadUser();
@@ -69,6 +63,24 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       setLoading(false);
+      setError(error?.response?.data?.message);
+    }
+  };
+
+  const updatePassword = async ({ currentPassword,  newPassword }) => {
+    try {
+      const request = await axios.patch(
+        `${process.env.APP_API_BASE_URL}/users/change-pwd/${user.id}`, {
+          currentPassword,
+          newPassword,
+        }
+      );
+
+      if (request?.data?.success && request?.data?.message === "User Password Update Successfully") {
+        router.replace("/me");
+      }
+    } catch (error) {
+      console.log(error.response);
       setError(error?.response?.data?.message);
     }
   };
@@ -87,6 +99,7 @@ export const AuthProvider = ({ children }) => {
         setUser,
         registerUser,
         updateProfile,
+        updatePassword,
         clearErrors,
       }}
     >

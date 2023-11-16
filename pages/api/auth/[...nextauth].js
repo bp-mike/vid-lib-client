@@ -74,7 +74,7 @@ export default NextAuth({
               createdAt: request.data.user.createdAt,
             };
 
-            token.user = updatedUser;
+            token.user = updatedUser; //TODO fix to update user
           } else {
             // If the login fails, throw an error
             throw new Error(request.data.message);
