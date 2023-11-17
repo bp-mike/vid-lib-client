@@ -6,7 +6,7 @@ import CartContext from "@/context/CartContext";
 import Link from "next/link";
 
 const Cart = () => {
-  const { deleteItemFromCart, cart } = useContext(CartContext);
+  const { deleteItemFromCart, cart, saveOnCheckout } = useContext(CartContext);
 
   const amountWithoutTax = cart?.cartItems?.reduce(
     (acc, item) => acc + item.price,
@@ -17,6 +17,16 @@ const Cart = () => {
 
   const totalAmount = (Number(amountWithoutTax) + Number(taxAmount)).toFixed(2);
 
+  const checkoutHandler = () => {
+    const data = {
+      amount: amountWithoutTax,
+      tax: taxAmount,
+      totalAmount,
+    };
+
+    saveOnCheckout(data);
+  };
+// TODO if item is already in cart notify the user
   return (
     <>
       <section className="py-5 sm:py-7 bg-blue-100">
@@ -106,8 +116,8 @@ const Cart = () => {
                     </li>
                   </ul>
 
-                  <a className="px-4 py-3 mb-2 inline-block text-lg w-full text-center font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 cursor-pointer">
-                    Continue
+                  <a className="px-4 py-3 mb-2 inline-block text-lg w-full text-center font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 cursor-pointer" onClick={checkoutHandler}>
+                    Checkout
                   </a>
 
                   <Link

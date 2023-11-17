@@ -14,15 +14,15 @@ const Profile = () => {
         <div className="relative">
           <img
             className="w-16 h-16 rounded-full mr-4"
-            src={user?.avatar ? user?.avatar?.url : "/images/default.png"}
-            alt={user?.name}
+            src={user?.user?.avatar ? user?.user?.avatar?.url : "/images/default.png"}
+            alt={user?.user?.name}
           />
         </div>
         <figcaption>
-          <h5 className="font-semibold text-lg">{user?.name}</h5>
+          <h5 className="font-semibold text-lg">{user?.user?.name}</h5>
           <p>
-            <b>Email:</b> {user?.email} | <b>Joined On:</b>
-            {user?.createdAt?.substring(0, 10)}
+            <b>Email:</b> {user?.user?.email} | <b>Joined On:</b>
+            {user?.user?.createdAt?.substring(0, 10)}
           </p>
         </figcaption>
       </figure>

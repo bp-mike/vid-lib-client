@@ -16,7 +16,7 @@ const Header = () => {
 
   useEffect(() => {
     if(data){
-      setUser(data.user.user)
+      setUser(data.user)
     }
   }, [data])
 
@@ -61,14 +61,14 @@ const Header = () => {
                   <img
                     className="w-10 h-10 rounded-full"
                     src={
-                      user?.avatar ? user?.avatar : "/images/default.png"
+                      user?.user?.avatar ? user?.user?.avatar : "/images/default.png"
                     }
                   />
                   <div className="space-y-1 font-medium">
                     <p>
-                      {user?.name}
+                      {user?.user?.name}
                       <time className="block text-sm text-gray-500 dark:text-gray-400">
-                        {user?.email}
+                        {user?.user?.email}
                       </time>
                     </p>
                   </div>
