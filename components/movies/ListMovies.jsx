@@ -19,7 +19,7 @@ const ListMovies = ({ data }) => {
             ))}
 
             <CustomPagination
-              totalMovies={data?.totalMovies}
+              totalCount={data?.totalMovies}
               pageSize={data?.pageSize}
             />
           </main>

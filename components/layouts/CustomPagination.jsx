@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import Pagination from "react-js-pagination";
 
-const CustomPagination = ({ pageSize, totalMovies }) => {
+const CustomPagination = ({ pageSize, totalCount }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -34,7 +34,7 @@ const CustomPagination = ({ pageSize, totalMovies }) => {
       <Pagination
         activePage={page}
         itemsCountPerPage={pageSize}
-        totalItemsCount={totalMovies}
+        totalItemsCount={totalCount}
         onChange={handlePageChange}
         nextPageText={"Next"}
         prevPageText={"Prev"}

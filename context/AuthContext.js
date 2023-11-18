@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }) => {
       setError(error?.response?.data?.message);
     }
   };
-
   
   const loadUser = async () => {
     try {
@@ -53,7 +52,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
 
       const request = await axios.patch(
-        `${process.env.APP_API_BASE_URL}/users/${user.id}`,
+        `${process.env.APP_API_BASE_URL}/users/${user?.user?.id}`,
         formData);
 
       if (request?.data?.success && request.data.message === "User Update Successfully") {
@@ -70,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   const updatePassword = async ({ currentPassword,  newPassword }) => {
     try {
       const request = await axios.patch(
-        `${process.env.APP_API_BASE_URL}/users/change-pwd/${user.id}`, {
+        `${process.env.APP_API_BASE_URL}/users/change-pwd/${user?.user?.id}`, {
           currentPassword,
           newPassword,
         }

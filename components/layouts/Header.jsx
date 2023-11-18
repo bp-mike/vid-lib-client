@@ -17,6 +17,8 @@ const Header = () => {
   useEffect(() => {
     if(data){
       setUser(data.user)
+      // Save user to localStorage
+      localStorage.setItem("user", JSON.stringify(data.user)); // TODO remove after saving in session
     }
   }, [data])
 

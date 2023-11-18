@@ -1,5 +1,10 @@
 <!-- TODO stop requests going over & over again -->
 
+//== test cards
+RobertJohnson
+4242424242424242 visa
+40000566556655564000056655665556 visa(debit)
+5555555555554444 mastercard
 
 "use client"
 
