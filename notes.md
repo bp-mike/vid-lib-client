@@ -1,5 +1,6 @@
 <!-- TODO stop requests going over & over again -->
-
+<!-- Check ToDO   //TODO follow new movie method -->
+<!-- TODO npm package i next with deps(mantine, tailwind,..) -->
 //== test cards
 RobertJohnson
 4242424242424242 visa
@@ -83,14 +84,16 @@ stored session data
 {
     "user": {
         "user": {
-            "id": 3,
+            "id": 2,
             "name": "RobertJohnson",
             "email": "robert.johnson@example.com",
-            "createdAt": "2023-11-12T14:14:12.150Z"
+            "avatar": "https://res.cloudinary.com/dbsnwtry7/image/upload/v1700169069/vidlib/lg3ikir2ngfvy4imdhba.jpg",
+            "role": "user",
+            "createdAt": "2023-11-16T13:05:15.849Z"
         },
-        "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlck5hbWUiOiJSb2JlcnRKb2huc29uIiwiZW1haWwiOiJyb2JlcnQuam9obnNvbkBleGFtcGxlLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMTJUMTQ6MTQ6MTIuMTUwWiIsImlhdCI6MTcwMDExNTQ5NywiZXhwIjoxNzAwMTE5MDM3fQ.EK6RS9D6nLx_KENGJn8P-hVkQWYVFRlDupVu833n4uM"
+        "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5hbWUiOiJSb2JlcnRKb2huc29uIiwiZW1haWwiOiJyb2JlcnQuam9obnNvbkBleGFtcGxlLmNvbSIsImF2YXRhciI6Imh0dHBzOi8vcmVzLmNsb3VkaW5hcnkuY29tL2Ric253dHJ5Ny9pbWFnZS91cGxvYWQvdjE3MDAxNjkwNjkvdmlkbGliL2xnM2lraXIybmdmdnk0aW1kaGJhLmpwZyIsInJvbGUiOiJ1c2VyIiwiY3JlYXRlZEF0IjoiMjAyMy0xMS0xNlQxMzowNToxNS44NDlaIiwiaWF0IjoxNzAwMjI2NTY3LCJleHAiOjE3MDA0ODU3Njd9.bfs3Uo_TQcjefY9GassDfH5ELrTT3iKiMEc7LZSQs6Y"
     },
-    "expires": "2023-12-16T06:22:21.666Z"
+    "expires": "2023-12-18T22:05:14.797Z"
 }
 ##======================================
 updated user obj formdata 

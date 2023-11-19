@@ -10,6 +10,7 @@ const getOrders = async (searchParams) => {
   const urlParams = {
     page: searchParams.page || 1,
   };
+  //TODO follow new movie method
   const user = 2 // TODO use session user
 
   const searchQuery = queryString.stringify(urlParams);

@@ -56,7 +56,7 @@ const UpdateProfile = () => {
     const formData = {
       userName: name,
       email: email,
-      avatar: avatarUrl !== "" ? avatarUrl : avatar, // Assuming avatar is a base64-encoded string
+      avatar: avatarUrl !== "" ? avatarUrl : avatar, 
     };
     setAvatar(avatarUrl);
     console.log(avatar);
@@ -70,7 +70,7 @@ const UpdateProfile = () => {
       if (reader.readyState === 2) {
         // setAvatarPreview(reader.result);
         // setAvatar(reader.result);  // Set avatar after the file has been read
-        setAvatarPreview(reader.result);
+        setAvatarPreview(reader.result); //TODO set image for preview else get one from the link(cloudinary)
       }
     };
 

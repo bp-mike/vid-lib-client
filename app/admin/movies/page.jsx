@@ -1,15 +1,12 @@
+import React from "react";
 import axios from "axios";
-import ListMovies from "@/components/movies/ListMovies";
+
 import queryString from "query-string";
+import Movies from "@/components/admin/Movies";
 
 const getMovies = async (searchParams) => {
   const urlParams = {
-    titleSearch: searchParams.titleSearch,
     page: searchParams.page,
-    genre: searchParams.genre,
-    ratings: searchParams.ratings,
-    minPrice: searchParams.min,
-    maxPrice: searchParams.max,
   };
 
   const searchQuery = queryString.stringify(urlParams);
@@ -32,7 +29,8 @@ const getMovies = async (searchParams) => {
 
 const HomePage = async ({ searchParams }) => {
   const data = await getMovies(searchParams);
-  return <ListMovies data={data} />;
+
+  return <Movies data={data} />;
 };
 
 export default HomePage;
