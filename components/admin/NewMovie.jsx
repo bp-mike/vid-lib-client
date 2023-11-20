@@ -160,12 +160,12 @@ const NewMovie = () => {
               <div className="col-span-2">
                 <input
                   type="text"
-                  className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
+                  className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full cursor-not-allowed"
                   placeholder="0"
                   name="ratings"
                   value={ratings}
                   onChange={(e) => setRatings(e.target.value)}
-                  required
+                  disabled
                 />
               </div>
             </div>
