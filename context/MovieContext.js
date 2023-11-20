@@ -10,6 +10,7 @@ const MovieContext = createContext();
 export const MovieProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [updated, setUpdated] = useState(false);
 
   const router = useRouter();
 
@@ -27,6 +28,35 @@ export const MovieProvider = ({ children }) => {
     }
   };
 
+  const updateMovie = async (movie, id) => {
+    try {
+      const request = await axios.patch(`${process.env.APP_API_BASE_URL}/movies/${id}`, 
+        movie
+      );
+
+      if (request.data.success && request.data.message === "Movie Update Successfully") {
+        setUpdated(true);
+        router.replace(`/admin/movies/${id}`);
+      }
+    } catch (error) {
+      setError(error?.response?.data?.message);
+    }
+  };
+
+  const deleteMovie = async (id) => {
+    try {
+      const request = await axios.delete(`${process.env.APP_API_BASE_URL}/movies/${id}`);
+
+      if (request.data.success && request.data.message === "Movie Deleted Successfully") {
+        // setUpdated(true);
+        // todo getAllMovies
+        router.replace("/admin/movies");
+      }
+    } catch (error) {
+      setError(error?.response?.data?.message);
+    }
+  };
+
   const clearErrors = () => {
     setError(null);
   };
@@ -36,7 +66,11 @@ export const MovieProvider = ({ children }) => {
       value={{
         error,
         loading,
+        updated,
+        setUpdated,
         newMovie,
+        updateMovie,
+        deleteMovie,
         clearErrors,
       }}
     >

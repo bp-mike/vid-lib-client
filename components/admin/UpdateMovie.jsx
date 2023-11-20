@@ -1,18 +1,31 @@
 "use client";
 
 import MovieContext from "@/context/MovieContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
-const NewMovie = () => {
-  const { newMovie } = useContext(MovieContext);
+const UpdateMovie = ({ movie }) => {
+  const { updateMovie, error, updated, setUpdated, clearErrors } = useContext(MovieContext);
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [director, setDirector] = useState("");
-  const [price, setPrice] = useState("");
-  const [ratings, setRatings] = useState(0);
-  const [genre, setGenre] = useState("");
-  // const [image, setImage] = useState("");
+  const [title, setTitle] = useState(movie.title);
+  const [description, setDescription] = useState(movie.description);
+  const [director, setDirector] = useState(movie.director);
+  const [price, setPrice] = useState(movie.price);
+  const [ratings, setRatings] = useState(movie.ratings);
+  const [genre, setGenre] = useState(movie.genre);
+  const [image, setImage] = useState(movie.image);
+
+  useEffect(() => {
+    if (updated) {
+      toast.success("Movie Updated");
+      setUpdated(false);
+    }
+
+    if (error) {
+      toast.error(error);
+      clearErrors();
+    }
+  }, [error, updated]);
 
   
   const genres = ["Action", "Adventure", "Animation", "Comedy", "Crime"];
@@ -23,7 +36,7 @@ const NewMovie = () => {
     const form = e.currentTarget;
     const fileInput = Array.from(form.elements).find(({ id }) => id === "formFile");
 
-    let imageUrl = "";
+    let imageUrl = image;
 
     if (fileInput.files.length > 0) { // TODO put this in helper & make one that deletes the image from cloudinary
       const file = new FormData();
@@ -40,13 +53,14 @@ const NewMovie = () => {
         ).then((r) => r.json());
 
         imageUrl = cloudinaryResponse.secure_url;
+        setImage(imageUrl)
       } catch (error) {
         console.error("Error uploading image to Cloudinary:", error);
         // Handle the error, show a message, etc.
       }
     }
 
-    const movie = {
+    const updatedMovie = {
       title,
       description,
       director,
@@ -56,13 +70,13 @@ const NewMovie = () => {
       image: imageUrl, // Include the image URL
     };
 
-    newMovie(movie);
+    updateMovie(updatedMovie, movie.id);
   };
 
   return (
     <section className="container max-w-3xl p-6 mx-auto">
       <h1 className="mb-3 text-xl md:text-3xl font-semibold text-black mb-8">
-        Create New Movie
+        Update Movie
       </h1>
 
       <form onSubmit={submitHandler}>
@@ -120,9 +134,9 @@ const NewMovie = () => {
                 required
               >
                 <option value="">Select a Genre</option>
-                {genres.map((genre) => (
-                  <option key={genre} value={genre}>
-                    {genre}
+                {genres.map((genreOption) => (
+                  <option key={genreOption} value={genreOption} selected={genre === genreOption}>
+                    {genreOption}
                   </option>
                 ))}
               </select>
@@ -165,6 +179,7 @@ const NewMovie = () => {
                   name="ratings"
                   value={ratings}
                   onChange={(e) => setRatings(e.target.value)}
+                  disabled
                   required
                 />
               </div>
@@ -181,7 +196,6 @@ const NewMovie = () => {
               name="image"
               type="file"
               id="formFile"
-              required
             />
           </div> 
           {/* TODO image preview */}
@@ -191,11 +205,11 @@ const NewMovie = () => {
           type="submit"
           className="my-2 px-4 py-2 text-center inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 w-full"
         >
-          Create Movie
+          Update Movie
         </button>
       </form>
     </section>
   );
 };
 
-export default NewMovie;
+export default UpdateMovie;

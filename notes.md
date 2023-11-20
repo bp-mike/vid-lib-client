@@ -1,6 +1,7 @@
 <!-- TODO stop requests going over & over again -->
 <!-- Check ToDO   //TODO follow new movie method -->
 <!-- TODO npm package i next with deps(mantine, tailwind,..) -->
+<!-- TODO toast for del, patch & post reqs -->
 //== test cards
 RobertJohnson
 4242424242424242 visa
