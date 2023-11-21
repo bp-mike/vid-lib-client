@@ -1,13 +1,21 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import StarRatings from "react-star-ratings";
 import BreadCrumbs from "../layouts/BreadCrumbs";
 import CartContext from "@/context/CartContext";
+import NewReview from "../review/NewReview";
+import OrderContext from "@/context/OrderContext";
+import Reviews from "../review/Reviews";
 
 const MovieDetails = ({ movie }) => {
 
   const { addItemToCart } = useContext(CartContext)
+  const { canUserReview, canReview } = useContext(OrderContext);
+
+  useEffect(() => {
+    canUserReview(movie?.id);
+  }, []);
 
   const addToCartHandler = () => {
     addItemToCart({
@@ -97,14 +105,14 @@ const MovieDetails = ({ movie }) => {
             </main>
           </div>
 
-          {/* <NewReview /> */}
+          {canReview && <NewReview movie={movie}/> }
           <hr />
 
           <div className="font-semibold">
             <h1 className="text-gray-500 review-title mb-6 mt-10 text-2xl">
               Other Customers Reviews
             </h1>
-            {/* <Reviews /> */}
+            <Reviews reviews={movie?.reviews}/>
           </div>
         </div>
       </section>

@@ -57,6 +57,20 @@ export const MovieProvider = ({ children }) => {
     }
   };
 
+  const postReview = async (reviewData) => {
+    try {
+      const request = await axios.post(`${process.env.APP_API_BASE_URL}/reviews`, 
+        reviewData
+      );
+
+      if (request.data.success && request.data.message === "Review created successfully") {
+        router.replace(`/movie/${reviewData?.movieId}`);
+      }
+    } catch (error) {
+      setError(error?.response?.data?.message);
+    }
+  };
+
   const clearErrors = () => {
     setError(null);
   };
@@ -71,6 +85,7 @@ export const MovieProvider = ({ children }) => {
         newMovie,
         updateMovie,
         deleteMovie,
+        postReview,
         clearErrors,
       }}
     >
